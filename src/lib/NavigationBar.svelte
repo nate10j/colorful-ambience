@@ -3,9 +3,7 @@
 		<h1>Colorful Ambience</h1>
 	</a>
 
-
 	<ul>
-		<li><a href="/">Home</a></li>
 		<li><a href="/app">App</a></li>
 	</ul>
 </nav>
@@ -13,16 +11,30 @@
 <style>
 nav {
 	display: flex;
-	justify-content: space-between;
-	padding: 1rem;
+	padding: 1rem 5rem;
+	border-bottom: 2px solid #FFD8B8;
+}
+
+a {
+	color: #552D2D;
+	text-decoration: none;
+}
+
+h1 {
+	font-size: 2rem;
+	font-weight: 900;
+	margin-right: 1rem;
 }
 
 ul {
 	display: flex;
+	align-items: center;
 }
 
 ul li {
-	padding: 0 0 0 1rem;
+	padding: 0 1rem;
 	list-style: none;
+	font-size: 1.2rem;
+	font-weight: 600;
 }
 </style>
