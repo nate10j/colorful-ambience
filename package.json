@@ -5,8 +5,8 @@
 	"scripts": {
 		"dev": "dev:wasm && vite dev",
 		"build": "build:wasm && vite build",
-		"dev:wasm": "wasm-pack build noise-generator --out-dir ../src/lib/pkg --dev",
-		"build:wasm": "wasm-pack build noise-generator --out-dir ../src/lib/pkg --release",
+		"dev:wasm": "wasm-pack build noise-generator --out-dir ../src/lib/pkg --dev --target web",
+		"build:wasm": "wasm-pack build noise-generator --out-dir ../src/lib/pkg --release --target web",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
@@ -32,7 +32,8 @@
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.0.0",
-		"vite": "^6.0.0",
+		"vite": "^6.0.3",
+		"vite-plugin-wasm-pack": "^0.1.12",
 		"vitest": "^2.0.4"
 	}
 }
