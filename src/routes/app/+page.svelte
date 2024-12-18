@@ -1,7 +1,12 @@
 <script>
-console.log("hey")
+import init, {greet} from "noise-generator"
+
+init().then(() => {
+	console.log('init wasm-pack');
+	greet('from vite!');
+});
 </script>
 
 <div class="container">
-	
+
 </div>
