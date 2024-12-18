@@ -3,12 +3,10 @@
 		<div class="content">
 			<h1>
 				Play noises
-				<br/>
 				that help you <span class="focus">focus</span>
 			</h1>
 			<p class="description">
-				Listen to ambient brown noise, white noise and pink noise<br/>
-				and block out distracting sounds to relax, sleep or increase focus
+				Listen to brown noise, pink noise, white noise, and more later
 			</p>
 			<div class="cta">
 				<a href="/app">Play noise</a>
@@ -25,12 +23,7 @@
 .hero .container {
 	background-size: contain;
 	background-position: center bottom;
-	max-width: 1170;
 	height: 550px;
-	padding: 0 5rem;
-}
-.hero .content {
-	width: 70%;
 }
 
 .hero h1 {
@@ -38,6 +31,7 @@
 	font-size: 3.5rem;
 	margin: 3rem 0;
 	color: #462525;
+	max-width: 36rem;
 }
 
 .hero .description {
@@ -46,6 +40,18 @@
 	font-weight: 350;
 	margin-bottom: 3.2rem;
 	color: #804444;
+}
+
+@media(max-width: 800px) {
+	.hero h1 {
+		font-size: 3rem;
+	}
+}
+
+@media(max-width: 600px) {
+	.hero h1 {
+		font-size: 2.5rem;
+	}
 }
 
 .focus {

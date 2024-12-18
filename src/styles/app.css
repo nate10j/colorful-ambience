@@ -7,6 +7,16 @@
 body {
 	background: #FFE0C5;
 }
+ 
+.container { 
+	padding: 0 5rem;
+}
+
+@media(max-width: 600px) {
+	.container {
+		padding: 0 2rem;
+	}
+}
 
 :root { font-family: "Inter", sans-serif; }
 @supports (font-variation-settings: normal) {

@@ -15,6 +15,12 @@ nav {
 	border-bottom: 2px solid #FFD8B8;
 }
 
+@media(max-width: 600px) {
+	nav {
+		padding: 1rem 2rem;
+	}
+}
+
 a {
 	color: #552D2D;
 	text-decoration: none;
