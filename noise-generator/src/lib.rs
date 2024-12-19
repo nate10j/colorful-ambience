@@ -9,3 +9,7 @@ extern "C" {
 pub fn greet(name: &str) {
     alert(&format!("Hello, {}!", name));
 }
+
+pub fn white_noise() {
+    alert("generating white noise");
+}
