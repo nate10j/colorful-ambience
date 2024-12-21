@@ -10,6 +10,8 @@ onMount(() => {
 async function setup() {
 	const audioCtx = new AudioContext();
 	await audioCtx.audioWorklet.addModule(audioProcessorUrl);
+	const worklet = new AudioWorkletNode(audioCtx, "NoiseProcessor");
+	worklet.connect(audioCtx.destination);
 }
 
 function playWhiteNoise() {
