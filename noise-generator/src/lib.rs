@@ -7,7 +7,7 @@ extern "C" {
 
 #[wasm_bindgen]
 pub fn greet(name: &str) {
-    alert(&format!("Hello, {}!", name));
+    alert(&format!("Hello, {}! rand: {}", name, fastrand::i32(..)));
 }
 
 pub fn white_noise() {
