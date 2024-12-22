@@ -2,14 +2,24 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 extern "C" {
-    pub fn alert(s: &str);
+pub fn alert(s: &str);
+}
+
+
+#[wasm_bindgen]
+pub struct NoiseGenerator {
 }
 
 #[wasm_bindgen]
-pub fn greet(name: &str) {
-    alert(&format!("Hello, {}! rand: {}", name, fastrand::i32(..)));
-}
+impl NoiseGenerator {
+    pub fn new() -> Self {
+        Self {}
+    }
+    pub fn process(&mut self, output: &mut [f32]) -> bool {
+        for a in output {
+            *a = fastrand::f32() * 2.0 - 1.0;
+        }
 
-pub fn white_noise() {
-    alert("generating white noise");
+        true
+    }
 }
