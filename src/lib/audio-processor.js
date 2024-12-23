@@ -11,15 +11,14 @@ class NoiseProcessor extends AudioWorkletProcessor {
 
 		// this is neccessary or else it wont load the module in
 		let { wasmModule } = options?.processorOptions;
+
+		// deprecated paremeter, fix later (technical debt)
 		initSync( wasmModule );
 
-		// construct an oscillator (in wasm)
 		this.generator = NoiseGenerator.new();
 	}
 	process(inputs, outputs, parameters) {
-		for (let i = 0; i < outputs[0].length; i++) {
-			this.generator.process(outputs[0][i])
-		}
+		this.generator.process(outputs[0][0])
 		return true;
 	}
 }
