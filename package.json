@@ -3,8 +3,9 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "wasm-pack build ./noise-generator --target web && vite dev",
-		"build": "wasm-pack build ./noise-generator --target web && vite build",
+		"dev": "vite dev",
+		"build": "vite build",
+		"wasm": "wasm-pack build ./noise-generator --out-dir ../src/lib/pkg/ --target web",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
