@@ -1,5 +1,10 @@
 use wasm_bindgen::prelude::*;
 
+// we need a seperate struct because we need to save seperate values
+// and simply putting an object will reset them
+mod pink_noise_generator;
+use crate::pink_noise_generator::PinkNoiseGenerator;
+
 #[wasm_bindgen]
 extern "C" {
 #[wasm_bindgen(js_namespace = console)]
@@ -15,23 +20,9 @@ pub enum ColorNoise {
     Brown
 }
 
-#[wasm_bindgen]
-pub struct NoiseGenerator {
-    color_noise: ColorNoise,
-    i: u32 // for debugging purposes
-}
-
 fn fill_white_noise(buffer: &mut [f32]) {
     for a in buffer {
         *a = fastrand::f32() * 2.0 - 1.0;
-    }
-}
-
-const PINK_NUM_OCTAVES: u32 = 6;
-
-fn fill_pink_noise(buffer: &mut [f32]) {
-    for a in buffer {
-
     }
 }
 
@@ -41,15 +32,32 @@ fn fill_brown_noise(buffer: &mut [f32]) {
     }
 }
 
+fn fill_pink_noise(buffer: &mut [f32], pink_noise_generator: &mut PinkNoiseGenerator) {
+    for a in buffer {
+        *a = pink_noise_generator.sample();
+    }
+}
+
+#[wasm_bindgen]
+pub struct NoiseGenerator {
+    color_noise: ColorNoise,
+    pink_noise_generator: PinkNoiseGenerator,
+    i: u32 // debugging purposes
+}
+
 #[wasm_bindgen]
 impl NoiseGenerator {
     pub fn new(color_noise: ColorNoise) -> Self {
-        Self { i: 0, color_noise }
+        Self {
+            color_noise,
+            pink_noise_generator: PinkNoiseGenerator::new(16),
+            i: 0
+        }
     }
     pub fn process(&mut self, output: &mut [f32]) -> bool {
         match self.color_noise {
             ColorNoise::White => fill_white_noise(output),
-            ColorNoise::Pink => fill_pink_noise(output),
+            ColorNoise::Pink => fill_pink_noise(output, &mut self.pink_noise_generator),
             ColorNoise::Brown => fill_brown_noise(output),
         }
 
