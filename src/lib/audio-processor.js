@@ -1,7 +1,7 @@
 // note: IDE will have issues with this file ignore lsp errors
 // IDE does not understand context of AudioWorkletProcessor
 // This is loaded in app/+page.svelte via audioWorklet.addModule()
-import { initSync, NoiseGenerator } from "./pkg/noise_generator";
+import { initSync, ColorNoise, NoiseGenerator } from "./pkg/noise_generator";
 
 class NoiseProcessor extends AudioWorkletProcessor {
 	generator;
@@ -15,7 +15,7 @@ class NoiseProcessor extends AudioWorkletProcessor {
 		// deprecated paremeter, fix later (technical debt)
 		initSync( wasmModule );
 
-		this.generator = NoiseGenerator.new();
+		this.generator = NoiseGenerator.new(ColorNoise.White);
 	}
 	process(inputs, outputs, parameters) {
 		this.generator.process(outputs[0][0])
