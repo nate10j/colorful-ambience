@@ -2,10 +2,13 @@
 import audioProcessorUrl from "$lib/audio-processor.js?url";
 import wasmUrl from "$lib/pkg/noise_generator_bg.wasm?url";
 
+import { ColorNoise } from "$lib/pkg/noise_generator";
+
 import { onMount } from "svelte";
 
 let wasmModulePromise;
 let audioCtx;
+let worklet;
 
 onMount(() => {
 	wasmModulePromise = fetch(wasmUrl).then((res) => res.arrayBuffer());
@@ -14,23 +17,42 @@ onMount(() => {
 
 async function setup() {
 	audioCtx = new AudioContext();
+
 	await audioCtx.audioWorklet.addModule(audioProcessorUrl);
 
 	const wasmModule = await wasmModulePromise;
 
-	const worklet = new AudioWorkletNode(audioCtx, "NoiseProcessor", {
+	worklet = new AudioWorkletNode(audioCtx, "NoiseProcessor", {
 		processorOptions: { wasmModule },
 	});
-	worklet.connect(audioCtx.destination);
 }
 
 function playWhiteNoise() {
+	worklet.port.postMessage({type: "updateColorNoise", data: ColorNoise.White})
 	if (audioCtx.state === "suspended") {
+		worklet.connect(audioCtx.destination);
+		audioCtx.resume();
+	}
+}
+
+function playPinkNoise() {
+	worklet.port.postMessage({type: "updateColorNoise", data: ColorNoise.Pink})
+	if (audioCtx.state === "suspended") {
+		worklet.connect(audioCtx.destination);
 		audioCtx.resume();
 	}
 }
 </script>
 
 <div class="container">
-	<button type="button" on:click={playWhiteNoise}>white noise</button> 
+	<form>
+		<div>
+			<button class="white" on:click={playWhiteNoise}>White noise</button>
+			<button class="pink" on:click={playPinkNoise}>Pink noise</button>
+			<button class="brown">Brown noise</button>
+		</div>
+	</form>
 </div>
+
+<style>
+</style>

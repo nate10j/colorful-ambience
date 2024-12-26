@@ -15,8 +15,17 @@ class NoiseProcessor extends AudioWorkletProcessor {
 		// deprecated paremeter, fix later (technical debt)
 		initSync( wasmModule );
 
-		this.generator = NoiseGenerator.new(ColorNoise.Pink);
+		this.generator = NoiseGenerator.new(ColorNoise.White);
+
+		this.port.onmessage = (e) => {
+			const msg = e.data;
+			switch (msg.type) {
+				case "updateColorNoise":
+					this.generator.change_color(msg.data);
+			}
+		};
 	}
+
 	process(inputs, outputs, parameters) {
 		this.generator.process(outputs[0][0])
 		return true;

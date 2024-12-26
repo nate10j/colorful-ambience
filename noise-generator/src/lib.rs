@@ -7,10 +7,8 @@ use crate::pink_noise_generator::PinkNoiseGenerator;
 
 #[wasm_bindgen]
 extern "C" {
-#[wasm_bindgen(js_namespace = console)]
-fn log(s: &str);
-#[wasm_bindgen(js_namespace = console, js_name = log)]
-fn log_u32(a: u32);
+    #[wasm_bindgen(js_namespace = console, js_name = log)]
+    fn log_u32(a: u32);
 }
 
 #[wasm_bindgen]
@@ -50,7 +48,7 @@ impl NoiseGenerator {
     pub fn new(color_noise: ColorNoise) -> Self {
         Self {
             color_noise,
-            pink_noise_generator: PinkNoiseGenerator::new(16),
+            pink_noise_generator: PinkNoiseGenerator::new(6),
             i: 0
         }
     }
@@ -63,9 +61,18 @@ impl NoiseGenerator {
 
         if self.i % 1000 == 0 {
             log_u32(output.len().try_into().unwrap());
+            match self.color_noise {
+                ColorNoise::White => log_u32(0),
+                ColorNoise::Pink => log_u32(1),
+                ColorNoise::Brown => log_u32(2)
+            }
         }
         self.i += 1;
 
         true
+    }
+
+    pub fn change_color(&mut self, color: ColorNoise) {
+        self.color_noise = color;
     }
 }
