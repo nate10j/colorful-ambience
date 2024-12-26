@@ -57,7 +57,7 @@ function playPinkNoise() {
 	</form>
 
 	{#if audioCtx != null && worklet != null}
-		<AudioVisualiser width={800} height={400} audioCtx={audioCtx} noiseNode={worklet}/>
+		<AudioVisualiser width={400} height={100} audioCtx={audioCtx} noiseNode={worklet}/>
 	{/if}
 </div>
 

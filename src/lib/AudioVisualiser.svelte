@@ -8,7 +8,7 @@ let { width, height, audioCtx, noiseNode } = $props();
 
 onMount(() => {
 	analyser = audioCtx.createAnalyser();
-	analyser.fftSize = 1024;
+	analyser.fftSize = 128;
 	bufferLength = analyser.frequencyBinCount;
 	dataArray = new Uint8Array(bufferLength);
 
@@ -21,6 +21,7 @@ onMount(() => {
 });
 
 function draw() {
+	requestAnimationFrame(draw);
 	analyser.getByteFrequencyData(dataArray);
 
 	canvasCtx.fillStyle = 'rgb(0, 0, 0)';
@@ -38,17 +39,10 @@ function draw() {
 
 		x += barWidth + 1;
 	}
-
-	requestAnimationFrame(draw);
 }
 </script>
 
 <style>
-canvas {
-	display: block;
-	margin: 0 auto;
-	border: 1px solid black;
-}
 </style>
 
 <canvas {width} {height} bind:this={canvas}></canvas>
