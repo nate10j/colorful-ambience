@@ -47,8 +47,7 @@ pub struct NoiseGenerator {
 impl NoiseGenerator {
     pub fn new(color_noise: ColorNoise) -> Self {
         Self {
-            color_noise,
-            pink_noise_generator: PinkNoiseGenerator::new(6),
+            color_noise, pink_noise_generator: PinkNoiseGenerator::new(16),
             i: 0
         }
     }
