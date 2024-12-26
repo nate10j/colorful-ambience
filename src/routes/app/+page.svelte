@@ -5,6 +5,8 @@ import wasmUrl from "$lib/pkg/noise_generator_bg.wasm?url";
 import { ColorNoise } from "$lib/pkg/noise_generator";
 
 import { onMount } from "svelte";
+import AudioVisualiser from "$lib/AudioVisualiser.svelte";
+import startVisualiser from "$lib/AudioVisualiser.svelte";
 
 let wasmModulePromise;
 let audioCtx;
@@ -25,6 +27,7 @@ async function setup() {
 	worklet = new AudioWorkletNode(audioCtx, "NoiseProcessor", {
 		processorOptions: { wasmModule },
 	});
+
 }
 
 function playWhiteNoise() {
@@ -52,6 +55,10 @@ function playPinkNoise() {
 			<button class="brown">Brown noise</button>
 		</div>
 	</form>
+
+	{#if audioCtx != null && worklet != null}
+		<AudioVisualiser width={800} height={400} audioCtx={audioCtx} noiseNode={worklet}/>
+	{/if}
 </div>
 
 <style>
