@@ -8,7 +8,7 @@ let { width, height, audioCtx, noiseNode } = $props();
 
 onMount(() => {
 	analyser = audioCtx.createAnalyser();
-	analyser.fftSize = 2048;
+	analyser.fftSize = 1024;
 	bufferLength = analyser.frequencyBinCount;
 	dataArray = new Uint8Array(bufferLength);
 
@@ -21,33 +21,23 @@ onMount(() => {
 });
 
 function draw() {
-	analyser.getByteTimeDomainData(dataArray);
+	analyser.getByteFrequencyData(dataArray);
 
-	canvasCtx.fillStyle = 'rgb(200, 200, 200)';
-	canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+	canvasCtx.fillStyle = 'rgb(0, 0, 0)';
+	canvasCtx.clearRect(0, 0, width, height);
 
-	canvasCtx.lineWidth = 2;
-	canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
-	canvasCtx.beginPath();
-
-	const sliceWidth = canvas.width * 1.0 / bufferLength;
+	const barWidth = (width / bufferLength) * 2.5;
+	let barHeight;
 	let x = 0;
 
 	for (let i = 0; i < bufferLength; i++) {
-		const v = dataArray[i] / 128.0;
-		const y = v * canvas.height / 2;
+		barHeight = dataArray[i] / 2;
 
-		if (i === 0) {
-			canvasCtx.moveTo(x, y);
-		} else {
-			canvasCtx.lineTo(x, y);
-		}
+		canvasCtx.fillStyle = 'rgb(' + (barHeight + 100) + ',50,50)';
+		canvasCtx.fillRect(x, height - barHeight / 2, barWidth, barHeight);
 
-		x += sliceWidth;
+		x += barWidth + 1;
 	}
-
-	canvasCtx.lineTo(canvas.width, canvas.height / 2);
-	canvasCtx.stroke();
 
 	requestAnimationFrame(draw);
 }
