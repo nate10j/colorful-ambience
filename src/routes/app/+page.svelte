@@ -19,6 +19,7 @@ onMount(() => {
 
 async function setup() {
 	audioCtx = new AudioContext();
+	audioCtx.suspend();
 
 	await audioCtx.audioWorklet.addModule(audioProcessorUrl);
 
