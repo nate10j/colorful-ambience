@@ -57,7 +57,7 @@ mod tests {
     fn pink_noise_samples() -> io::Result<()> {
         let mut file = File::create("pink_noise_samples.txt")?;
         let mut pink_noise_generator = PinkNoiseGenerator::new(16);
-        for _ in 0..1000 {
+        for _ in 0..5000 {
             writeln!(file, "{}", pink_noise_generator.sample())?; 
         }
 
