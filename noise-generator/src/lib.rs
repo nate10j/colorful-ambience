@@ -18,9 +18,11 @@ pub enum ColorNoise {
     Brown
 }
 
+const WHITE_NOISE_VOLUME_MULTIPLIER: f32 = 0.1;
+
 fn fill_white_noise(buffer: &mut [f32]) {
     for a in buffer {
-        *a = fastrand::f32() * 2.0 - 1.0;
+        *a = (fastrand::f32() * 2.0 - 1.0) * WHITE_NOISE_VOLUME_MULTIPLIER; // scaling
     }
 }
 
