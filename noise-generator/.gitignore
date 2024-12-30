@@ -3,3 +3,7 @@
 Cargo.lock
 bin/
 wasm-pack.log
+
+brown_noise_samples.txt
+pink_noise_samples.txt
+white_noise_samples.txt
