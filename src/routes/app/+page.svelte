@@ -29,12 +29,12 @@ async function setup() {
 		processorOptions: { wasmModule },
 	});
 
+	worklet.connect(audioCtx.destination);
 }
 
 function playWhiteNoise() {
 	worklet.port.postMessage({type: "updateColorNoise", data: ColorNoise.White})
 	if (audioCtx.state === "suspended") {
-		worklet.connect(audioCtx.destination);
 		audioCtx.resume();
 	}
 }
@@ -42,7 +42,14 @@ function playWhiteNoise() {
 function playPinkNoise() {
 	worklet.port.postMessage({type: "updateColorNoise", data: ColorNoise.Pink})
 	if (audioCtx.state === "suspended") {
-		worklet.connect(audioCtx.destination);
+		audioCtx.resume();
+	}
+}
+
+function playBrownNoise() {
+	worklet.port.postMessage({type: "updateColorNoise", data: ColorNoise.Brown})
+
+	if (audioCtx.state === "suspended") {
 		audioCtx.resume();
 	}
 }
@@ -53,7 +60,7 @@ function playPinkNoise() {
 		<div>
 			<button class="white" on:click={playWhiteNoise}>White noise</button>
 			<button class="pink" on:click={playPinkNoise}>Pink noise</button>
-			<button class="brown">Brown noise</button>
+			<button class="brown" on:click={playBrownNoise}>Brown noise</button>
 		</div>
 	</form>
 
