@@ -1,6 +1,6 @@
 const PINK_MAX_RANDOM_ROWS: u32 = 30;
-const PINK_RANDOM_BITS: u32 = 24;
-const PINK_RANDOM_SHIFT: u32 = (std::mem::size_of::<u32>() * 8) as u32 - PINK_RANDOM_BITS;
+const PINK_RANDOM_BITS: usize = 24;
+const PINK_RANDOM_SHIFT: usize = (std::mem::size_of::<i32>() * 8) - PINK_RANDOM_BITS;
 
 pub struct PinkNoiseGenerator {
     rows: Vec<f32>,
@@ -44,23 +44,5 @@ impl PinkNoiseGenerator {
         let new_random = (fastrand::u32(..) >> PINK_RANDOM_SHIFT) as f32;
         let sum = self.running_sum + new_random;
         self.scalar * sum - 1.0
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use std::fs::File;
-    use std::io::{self, Write};
-    use crate::PinkNoiseGenerator;
-
-    #[test]
-    fn pink_noise_samples() -> io::Result<()> {
-        let mut file = File::create("pink_noise_samples.txt")?;
-        let mut pink_noise_generator = PinkNoiseGenerator::new(16);
-        for _ in 0..5000 {
-            writeln!(file, "{}", pink_noise_generator.sample())?; 
-        }
-
-        Ok(())
     }
 }
