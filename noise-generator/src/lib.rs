@@ -40,7 +40,7 @@ fn fill_brown_noise(buffer: &mut [f32], smooth: f32) {
 
 fn fill_pink_noise(buffer: &mut [f32], pink_noise_generator: &mut PinkNoiseGenerator) {
     for a in buffer {
-        *a = pink_noise_generator.sample() * 0.5; // adjust for gain
+        *a = pink_noise_generator.sample() * 0.6; // adjust for gain
     }
 }
 
@@ -64,7 +64,7 @@ impl NoiseGenerator {
         match self.color_noise {
             ColorNoise::White => fill_white_noise(output),
             ColorNoise::Pink => fill_pink_noise(output, &mut self.pink_noise_generator),
-            ColorNoise::Brown => fill_brown_noise(output, 0.9),
+            ColorNoise::Brown => fill_brown_noise(output, 0.86),
         }
 
         if self.i % 1000 == 0 {

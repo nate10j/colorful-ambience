@@ -1,4 +1,3 @@
-const PINK_MAX_RANDOM_ROWS: u32 = 30;
 const PINK_RANDOM_BITS: usize = 24;
 const PINK_RANDOM_SHIFT: usize = (std::mem::size_of::<i32>() * 8) - PINK_RANDOM_BITS;
 
