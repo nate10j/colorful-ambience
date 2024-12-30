@@ -28,13 +28,13 @@ fn fill_white_noise(buffer: &mut [f32]) {
     }
 }
 
-fn fill_brown_noise(buffer: &mut [f32]) {
+fn fill_brown_noise(buffer: &mut [f32], smooth: f32) {
     let mut last_out: f32 = 0.0;
-    for i in 0..buffer.len() {
+    let gain = 1.0 / (buffer.len() as f32).sqrt();
+    for a in buffer {
         let white = fastrand::f32() * 2.0 - 1.0;
-        buffer[i] = (last_out + (0.02 * white)) / 1.02;
-        last_out = buffer[i];
-        buffer[i] *= 1.1; // adjust for gain
+        last_out = white + last_out * smooth; // make brown noise sound smoother
+        *a = last_out * gain * 0.5; // adjust for gain
     }
 }
 
@@ -64,7 +64,7 @@ impl NoiseGenerator {
         match self.color_noise {
             ColorNoise::White => fill_white_noise(output),
             ColorNoise::Pink => fill_pink_noise(output, &mut self.pink_noise_generator),
-            ColorNoise::Brown => fill_brown_noise(output),
+            ColorNoise::Brown => fill_brown_noise(output, 0.9),
         }
 
         if self.i % 1000 == 0 {
@@ -107,7 +107,9 @@ mod tests {
     fn brown_noise_samples() -> io::Result<()> {
         let mut file = File::create("brown_noise_samples.txt")?;
         let mut noise_array = vec![0.0; 5000];
-        fill_brown_noise(&mut noise_array);
+        fill_brown_noise(&mut noise_array, 1.0);
+        // for accurate graphing
+        // smoothing is only applied for practical purposes
         for a in noise_array {
             writeln!(file, "{}", a)?; 
         }

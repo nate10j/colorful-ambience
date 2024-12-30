@@ -15,22 +15,23 @@ def plot_power_spectrum(filename, noise_type='pink'):
 
     # Create the reference line
     if noise_type == 'pink':
-        reference_line = -10 * np.log10(frequencies) - 30
+        reference_slope = -10
     elif noise_type == 'brown':
-        reference_line = -20 * np.log10(frequencies) - 50
+        reference_slope = -20
     else:
         raise ValueError("Unsupported noise type. Use 'pink' or 'brown'.")
 
+    reference_line = reference_slope * np.log10(frequencies)
     reference_line[0] = reference_line[1]  # Handle the zero frequency case
 
-    # Adjust the reference line and power spectrum with the offset
-    adjusted_power_spectrum_db = power_spectrum_db
-    adjusted_reference_line = reference_line
+    # Calculate the offset to align reference line with power spectrum
+    offset = power_spectrum_db[1] - reference_line[1]
+    reference_line += offset
 
     # Plot the power spectrum
     plt.figure(figsize=(10, 6))
-    plt.plot(frequencies, adjusted_power_spectrum_db, label='Power Spectrum')
-    plt.plot(frequencies, adjusted_reference_line, label=f'1/f^{2 if noise_type == "brown" else 1} Reference', linestyle='--', color='red')
+    plt.plot(frequencies, power_spectrum_db, label='Power Spectrum')
+    plt.plot(frequencies, reference_line, label=f'1/f^{2 if noise_type == "brown" else 1} Reference', linestyle='--', color='red')
     plt.title(f'Power Spectrum of {noise_type.capitalize()} Noise')
     plt.xlabel('Frequency (Hz)')
     plt.ylabel('Power (dB)')
