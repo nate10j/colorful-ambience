@@ -64,7 +64,7 @@ impl NoiseGenerator {
         match self.color_noise {
             ColorNoise::White => fill_white_noise(output),
             ColorNoise::Pink => fill_pink_noise(output, &mut self.pink_noise_generator),
-            ColorNoise::Brown => fill_brown_noise(output, 0.86),
+            ColorNoise::Brown => fill_brown_noise(output, 0.96),
         }
 
         if self.i % 1000 == 0 {
