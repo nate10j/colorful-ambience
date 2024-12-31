@@ -4,7 +4,8 @@
 	</a>
 
 	<ul>
-		<li><a href="/app">App</a></li>
+		<li><a href="/app">app</a></li>
+		<li><a href="/about">about</a></li>
 	</ul>
 </nav>
 
@@ -16,7 +17,7 @@ nav {
 }
 
 h1 {
-	font-size: 2rem;
+	font-size: 1.8rem;
 	font-weight: 900;
 	margin-right: 1rem;
 }
