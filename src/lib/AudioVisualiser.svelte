@@ -4,16 +4,15 @@ import { onMount } from "svelte";
 let canvas, canvasCtx;
 let analyser, dataArray, bufferLength;
 
-let { width, height, audioCtx, noiseNode } = $props();
+let { width, height, fft, audioCtx, noiseNode } = $props();
 
 onMount(() => {
 	analyser = audioCtx.createAnalyser();
-	analyser.fftSize = 128;
+	analyser.fftSize = fft;
 	bufferLength = analyser.frequencyBinCount;
 	dataArray = new Uint8Array(bufferLength);
 
 	noiseNode.connect(analyser);
-	analyser.connect(audioCtx.destination);
 
 	canvasCtx = canvas.getContext('2d');
 
@@ -27,15 +26,15 @@ function draw() {
 	canvasCtx.fillStyle = 'rgb(0, 0, 0)';
 	canvasCtx.clearRect(0, 0, width, height);
 
-	const barWidth = (width / bufferLength) * 2.5;
+	const barWidth = (width / bufferLength) - 1;
 	let barHeight;
 	let x = 0;
 
 	for (let i = 0; i < bufferLength; i++) {
-		barHeight = dataArray[i] / 2;
+		barHeight = dataArray[i] / 1.7;
 
 		canvasCtx.fillStyle = 'rgb(' + (barHeight + 100) + ',50,50)';
-		canvasCtx.fillRect(x, height - barHeight / 2, barWidth, barHeight);
+		canvasCtx.fillRect(x, height - barHeight / 1.7, barWidth, barHeight);
 
 		x += barWidth + 1;
 	}
