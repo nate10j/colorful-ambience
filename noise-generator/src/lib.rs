@@ -20,7 +20,7 @@ pub enum ColorNoise {
     Brown
 }
 
-const WHITE_NOISE_VOLUME_MULTIPLIER: f32 = 0.1;
+const WHITE_NOISE_VOLUME_MULTIPLIER: f32 = 0.2;
 
 fn fill_white_noise(buffer: &mut [f32]) {
     for a in buffer {
@@ -40,7 +40,7 @@ fn fill_brown_noise(buffer: &mut [f32], smooth: f32) {
 
 fn fill_pink_noise(buffer: &mut [f32], pink_noise_generator: &mut PinkNoiseGenerator) {
     for a in buffer {
-        *a = pink_noise_generator.sample() * 0.6; // adjust for gain
+        *a = pink_noise_generator.sample() * 0.9; // adjust for gain
     }
 }
 
