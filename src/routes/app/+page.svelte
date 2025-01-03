@@ -1,17 +1,22 @@
 <script>
-import audioProcessorUrl from "$lib/audio-processor.js?url";
 import wasmUrl from "$lib/pkg/noise_generator_bg.wasm?url";
-
 import { ColorNoise } from "$lib/pkg/noise_generator";
 
 import { onMount } from "svelte";
+
 import AudioVisualiser from "$lib/AudioVisualiser.svelte";
-import startVisualiser from "$lib/AudioVisualiser.svelte";
+
+import audioProcessorUrl from "$lib/audio-processor.js?url";
 
 let wasmModulePromise;
+
 let audioCtx;
 let worklet;
 let gainNode;
+
+let colorNoise = ColorNoise.White;
+let toggleText = "Play";
+let playing = false;
 
 onMount(() => {
 	wasmModulePromise = fetch(wasmUrl).then((res) => res.arrayBuffer());
@@ -36,20 +41,11 @@ async function setup() {
 	gainNode.connect(audioCtx.destination)
 }
 
-function selectWhiteNoise() {
-	worklet.port.postMessage({type: "updateColorNoise", data: ColorNoise.White})
-}
+function selectNoise(selectedColorNoise) {
+	colorNoise = selectedColorNoise;
 
-function selectPinkNoise() {
-	worklet.port.postMessage({type: "updateColorNoise", data: ColorNoise.Pink})
+	worklet.port.postMessage({type: "updateColorNoise", data: selectedColorNoise})
 }
-
-function selectBrownNoise() {
-	worklet.port.postMessage({type: "updateColorNoise", data: ColorNoise.Brown})
-}
-
-let toggleText = "Play";
-let playing = false;
 
 function toggleButtonClick() {
 	if (playing) {
@@ -84,9 +80,9 @@ function onVolumeChange(event) {
 	{/if}
 	<div class="controls">
 		<ul>
-			<li><button class="white" on:click={selectWhiteNoise}>White</button></li>
-			<li><button class="pink" on:click={selectPinkNoise}>Pink</button></li>
-			<li><button class="brown" on:click={selectBrownNoise}>Brown</button></li>
+			<li><button class="white {colorNoise === ColorNoise.White ? "select" : ""}" on:click={() => selectNoise(ColorNoise.White)}>White</button></li>
+			<li><button class="pink {colorNoise === ColorNoise.Pink ? "select" : ""}" on:click={() => selectNoise(ColorNoise.Pink)}>Pink</button></li>
+			<li><button class="brown {colorNoise === ColorNoise.Brown ? "select" : ""}" on:click={() => selectNoise(ColorNoise.Brown)}>Brown</button></li>
 		</ul>
 		<div>
 		<input class="volume" type="range" value="80" min="0" max="100" on:change={onVolumeChange}>
@@ -127,7 +123,7 @@ ul {
 
 li button {
 	font-weight: 700;
-	font-size: 1rem;
+	font-size: 100%;
 	width: 100px;
 	height: 100px;
 	border: none;
@@ -154,6 +150,11 @@ li .pink {
 li .brown {
 	color: #FFF4EA;
 	background-color: #874747;
+}
+
+.controls .select {
+	opacity: 60%;
+	font-size: 125%;
 }
 
 .volume {
