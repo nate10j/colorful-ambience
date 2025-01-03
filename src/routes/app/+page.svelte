@@ -121,7 +121,7 @@ ul {
 	justify-content: space-between;
 }
 
-li button {
+.controls ul button {
 	font-weight: 700;
 	font-size: 100%;
 	width: 100px;
@@ -129,32 +129,33 @@ li button {
 	border: none;
 	cursor: pointer;
 	border-radius: 6px;
-	transition: transform 0.2s, opacity 0.2s;
+	transition: transform 0.2s, opacity 0.2s, font-size 0.2s;
 }
 
-li button:hover {
-	opacity: 80%;
-	transform: scale(1.05);
-}
-
-li .white {
+.controls ul .white {
 	color: #552D2D;
 	background-color: #FFF4EA;
 }
 
-li .pink {
+.controls ul .pink {
 	color: #552D2D;
 	background-color: #F59D92;
 }
 
-li .brown {
+.controls ul .brown {
 	color: #FFF4EA;
 	background-color: #874747;
 }
 
 .controls .select {
-	opacity: 60%;
-	font-size: 125%;
+	font-size: 126%;
+	opacity: 70%;
+	transform: scale(1.05);
+}
+
+.controls ul button:hover {
+	opacity: 90%;
+	transform: scale(1.05);
 }
 
 .volume {
