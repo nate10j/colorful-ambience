@@ -139,12 +139,12 @@ ul {
 
 .controls ul .pink {
 	color: #552D2D;
-	background-color: #F59D92;
+	background-color: #F3928B;
 }
 
 .controls ul .brown {
 	color: #FFF4EA;
-	background-color: #874747;
+	background-color: #8E4B4B;
 }
 
 .controls .select {
@@ -160,24 +160,24 @@ ul {
 
 .volume {
 	width: 100%;
-	margin: 5px 0;
+	margin: 1.5rem 0;
 }
 
 .toggle {
 	font-size: 1rem;
 	padding: 0.5rem 1.5rem;
 	width: 100%;
+	border-radius: 4px;
 	border: none;
+	background-color: #552D2D;
+	color: #FFF4EA;
+	font-weight: 600;
+	font-size: 1rem;
 	cursor: pointer;
-	border-radius: 6px;
-	background-color: #333;
-	color: #fff;
-	transition: background-color 0.2s, transform 0.2s;
 }
 
 .toggle:hover {
-	background-color: #555;
-	transform: scale(1.05);
+	opacity: 80%;
 }
 
 /* Media query to adjust layout for larger screens */
