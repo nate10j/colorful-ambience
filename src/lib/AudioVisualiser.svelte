@@ -19,6 +19,19 @@ onMount(() => {
 	draw();
 });
 
+function interpolateColor(value, maxValue) {
+    const startColor = { r: 250, g: 185, b: 164 };
+    const endColor = { r: 240, g: 128, b: 128 };
+
+    const t = value / maxValue;
+
+    const r = Math.round((1 - t) * startColor.r + t * endColor.r);
+    const g = Math.round((1 - t) * startColor.g + t * endColor.g);
+    const b = Math.round((1 - t) * startColor.b + t * endColor.b);
+
+	return `rgb(${r}, ${g}, ${b})`
+}
+
 function draw() {
 	requestAnimationFrame(draw);
 	analyser.getByteFrequencyData(dataArray);
@@ -33,7 +46,7 @@ function draw() {
 	for (let i = 0; i < bufferLength; i++) {
 		barHeight = dataArray[i] / 1.7;
 
-		canvasCtx.fillStyle = 'rgb(' + (barHeight + 100) + ',50,50)';
+		canvasCtx.fillStyle = interpolateColor(barHeight, 100);
 		canvasCtx.fillRect(x, height - barHeight / 1.7, barWidth, barHeight);
 
 		x += barWidth + 1;
