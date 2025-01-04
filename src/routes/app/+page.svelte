@@ -75,7 +75,7 @@ function onVolumeChange(event) {
 <div class="container">
 	{#if audioCtx != null && worklet != null}
 		<div class="visualiser-container">
-			<AudioVisualiser width={350} height={120} fft={64} audioCtx={audioCtx} noiseNode={gainNode}/>
+			<AudioVisualiser width={400} height={100} fft={64} audioCtx={audioCtx} noiseNode={gainNode}/>
 		</div>
 	{/if}
 	<div class="controls">
@@ -93,6 +93,7 @@ function onVolumeChange(event) {
 
 <style>
 .container {
+	margin: 2rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -189,6 +190,13 @@ ul {
 
 	.controls {
 		align-items: flex-start;
+	}
+}
+
+@media (max-width: 508px) {
+	.controls ul button {
+		width: 90px;
+		height: 90px;
 	}
 }
 </style>
