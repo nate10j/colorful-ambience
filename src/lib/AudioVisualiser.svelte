@@ -4,7 +4,7 @@ import { onMount } from "svelte";
 let canvas, canvasCtx;
 let analyser, dataArray, bufferLength;
 
-let { width, height, fft, audioCtx, noiseNode } = $props();
+let { className, width, height, fft, audioCtx, noiseNode } = $props();
 
 onMount(() => {
 	analyser = audioCtx.createAnalyser();
@@ -41,7 +41,4 @@ function draw() {
 }
 </script>
 
-<style>
-</style>
-
-<canvas {width} {height} bind:this={canvas}></canvas>
+<canvas class={className} {width} {height} bind:this={canvas}></canvas>

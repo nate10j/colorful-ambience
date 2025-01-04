@@ -74,9 +74,7 @@ function onVolumeChange(event) {
 
 <div class="container">
 	{#if audioCtx != null && worklet != null}
-		<div class="visualiser-container">
-			<AudioVisualiser width={400} height={100} fft={64} audioCtx={audioCtx} noiseNode={gainNode}/>
-		</div>
+		<AudioVisualiser className="visualiser" width={400} height={100} fft={64} audioCtx={audioCtx} noiseNode={gainNode}/>
 	{/if}
 	<div class="controls">
 		<ul>
@@ -84,9 +82,7 @@ function onVolumeChange(event) {
 			<li><button class="pink {colorNoise === ColorNoise.Pink ? "select" : ""}" on:click={() => selectNoise(ColorNoise.Pink)}>Pink</button></li>
 			<li><button class="brown {colorNoise === ColorNoise.Brown ? "select" : ""}" on:click={() => selectNoise(ColorNoise.Brown)}>Brown</button></li>
 		</ul>
-		<div>
 		<input class="volume" type="range" value="80" min="0" max="100" on:change={onVolumeChange}>
-		</div>
 		<button class="toggle" on:click={toggleButtonClick}>{toggleText}</button>
 	</div>
 </div>
@@ -101,11 +97,10 @@ function onVolumeChange(event) {
 	flex-wrap: wrap;
 }
 
-.visualiser-container {
-	width: 100%;
+:global(.visualiser) {
 	max-width: 350px;
-	margin: 0 1rem;
-	margin-bottom: 0.5rem;
+	width: 100%;
+	margin-bottom: 1rem;
 }
 
 .controls {
@@ -190,6 +185,11 @@ ul {
 
 	.controls {
 		align-items: flex-start;
+	}
+
+	:global(.visualiser) {
+		height: 7rem;
+		margin: 1rem 2rem;
 	}
 }
 
