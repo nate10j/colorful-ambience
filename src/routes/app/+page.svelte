@@ -93,12 +93,13 @@ function onVolumeChange(event) {
 
 <style>
 .container {
-	margin: 2rem;
+	margin-top: 3.5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
 	flex-wrap: wrap;
+	flex-direction: row-reverse;
 }
 
 :global(.visualiser) {
@@ -182,15 +183,6 @@ ul {
 
 /* Media query to adjust layout for larger screens */
 @media (min-width: 768px) {
-	.container {
-		flex-direction: row-reverse;
-		align-items: flex-start;
-	}
-
-	.controls {
-		align-items: flex-start;
-	}
-
 	:global(.visualiser) {
 		height: 7rem;
 		margin: 1rem 2rem;
