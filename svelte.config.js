@@ -13,8 +13,10 @@ const config = {
 		})
 	},
 
-	preprocess: [mdsvex()],
-	extensions: ['.svelte', '.svx']
+	preprocess: [mdsvex({
+		extensions: ['.md', '.svx']
+	})],
+	extensions: ['.svelte', '.md', '.svx']
 };
 
 export default config;
