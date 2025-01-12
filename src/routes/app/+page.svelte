@@ -17,6 +17,7 @@ let gainNode;
 let colorNoise = ColorNoise.White;
 let toggleText = "Play";
 let playing = false;
+let volume = 80; // default
 
 onMount(() => {
 	wasmModulePromise = fetch(wasmUrl).then((res) => res.arrayBuffer());
@@ -28,7 +29,7 @@ async function setup() {
 	audioCtx.suspend();
 
 	gainNode = new GainNode(audioCtx);
-	gainNode.gain.value = 0.8;
+	gainNode.gain.setValueAtTime(0, audioCtx.currentTime); // lerp at play
 	await audioCtx.audioWorklet.addModule(audioProcessorUrl);
 
 	const wasmModule = await wasmModulePromise;
@@ -58,17 +59,20 @@ function toggleButtonClick() {
 }
 
 function play() {
+	gainNode.gain.linearRampToValueAtTime(volume / 100, audioCtx.currentTime + 1)
 	audioCtx.resume();
 	toggleText = "Pause"
 }
 
 function pause() {
+	gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
 	audioCtx.suspend();
 	toggleText = "Play"
 }
 
 function onVolumeChange(event) {
-	gainNode.gain.value = event.target.value / 100, audioCtx.currentTime;
+	volume = event.target.value;
+	gainNode.gain.linearRampToValueAtTime(volume / 100, audioCtx.currentTime + 1)
 }
 </script>
 
