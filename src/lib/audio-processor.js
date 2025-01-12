@@ -1,4 +1,4 @@
-import { initSync, ColorNoise, NoiseGenerator } from "./pkg/noise_generator";
+import { initSync, ColorNoise, NoiseGenerator } from "noise_generator";
 
 class NoiseProcessor extends AudioWorkletProcessor {
 	generator;
