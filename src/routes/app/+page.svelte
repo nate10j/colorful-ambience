@@ -2,7 +2,7 @@
 import wasmUrl from "$lib/pkg/noise_generator_bg.wasm?url";
 import { ColorNoise } from "$lib/pkg/noise_generator";
 
-import { onMount } from "svelte";
+import { onDestroy, onMount } from "svelte";
 
 import AudioVisualiser from "$lib/AudioVisualiser.svelte";
 
@@ -23,6 +23,15 @@ onMount(() => {
 	wasmModulePromise = fetch(wasmUrl).then((res) => res.arrayBuffer());
 	setup();
 });
+
+onDestroy(() => {
+	if (worklet) {
+		worklet.disconnect();
+	}
+	if (audioCtx) {
+		audioCtx.close();
+	}
+})
 
 async function setup() {
 	audioCtx = new AudioContext();
