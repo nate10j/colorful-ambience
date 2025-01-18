@@ -42,7 +42,7 @@ jobs:
       - name: Build wasm
         run: npm run wasm
       - name: Build
-        run: npm run wasm
+        run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
