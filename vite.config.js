@@ -3,6 +3,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import wasmPack from 'vite-plugin-wasm-pack';
 
 export default defineConfig({
+	base: "/colorful-ambience/",
 	plugins: [sveltekit(), wasmPack(['./noise_generator'])], 
 
 	test: {
