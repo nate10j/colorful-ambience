@@ -12,7 +12,7 @@ const config = {
 			strict: true
 		}),
 		paths: {
-			base: "/colorful-ambience"
+			base: "/colorful-ambience/"
 		}
 	},
 
