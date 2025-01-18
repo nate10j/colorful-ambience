@@ -35,11 +35,14 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+      - name: Set up wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
       - name: Install dependencies
         run: npm ci
+      - name: Build wasm
+        run: npm run build
       - name: Build
         run: npm run wasm
-        run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
