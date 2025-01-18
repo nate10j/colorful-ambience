@@ -1,12 +1,11 @@
 <script>
-import wasmUrl from "noise_generator/noise_generator_bg.wasm?url";
-import { ColorNoise } from "noise_generator";
+import wasmUrl from "noise_generator/noise_generator_bg.wasm?url"
+import { initSync, NoiseGenerator, ColorNoise } from "noise_generator";
 
 import { onDestroy, onMount } from "svelte";
 
 import AudioVisualiser from "$lib/AudioVisualiser.svelte";
-
-import audioProcessorUrl from "$lib/audio-processor.js?url";
+import audioProcessorUrl from "$lib/audio-processor.js?worker&url";
 
 let wasmModulePromise;
 
