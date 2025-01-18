@@ -12,7 +12,7 @@ const config = {
 			strict: true
 		}),
 		paths: {
-			base: process.argv.includes('dev') ? '' : "/colorful-ambience"
+			relative: false
 		}
 	},
 
