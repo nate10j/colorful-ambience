@@ -1,3 +1,7 @@
+<script>
+	import { base } from "$app/paths"
+</script>
+
 <section class="hero">
 	<div class="container">
 		<div class="content">
@@ -9,7 +13,7 @@
 				Listen to brown noise, pink noise, white noise, and more later
 			</p>
 			<div class="cta">
-				<a href="/app">Play noise</a>
+				<a href="{base}/app">Play noise</a>
 				<p>no signup required!</p>
 				</div>
 			</div>
