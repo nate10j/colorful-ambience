@@ -40,7 +40,6 @@ fn fill_pink_noise(buffer: &mut [f32], pink_noise_generator: &mut PinkNoiseGener
 pub struct NoiseGenerator {
     color_noise: ColorNoise,
     pink_noise_generator: PinkNoiseGenerator,
-    i: u32 // debugging purposes
 }
 
 #[wasm_bindgen]
@@ -49,7 +48,6 @@ impl NoiseGenerator {
         Self {
             color_noise,
             pink_noise_generator: PinkNoiseGenerator::new(20),
-            i: 0
         }
     }
     pub fn process(&mut self, output: &mut [f32]) -> bool {

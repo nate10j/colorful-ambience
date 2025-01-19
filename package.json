@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"wasm": "wasm-pack build ./noise_generator --target web",
+		"wasm": "wasm-pack build ./noise_generator --out-dir ../src/lib/pkg --target web",
 		"prepare": "svelte-kit sync",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
@@ -31,7 +31,6 @@
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.0.0",
 		"vite": "^6.0.7",
-		"vite-plugin-wasm-pack": "^0.1.12",
 		"vitest": "^2.0.4"
 	},
 	"optionalDependencies": {

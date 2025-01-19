@@ -1,6 +1,6 @@
 <script>
-import wasmUrl from "noise_generator/noise_generator_bg.wasm?url"
-import { initSync, NoiseGenerator, ColorNoise } from "noise_generator";
+import wasmUrl from "$lib/pkg/noise_generator_bg.wasm?url";
+import { NoiseGenerator, ColorNoise } from "$lib/pkg/noise_generator";
 
 import { onDestroy, onMount } from "svelte";
 

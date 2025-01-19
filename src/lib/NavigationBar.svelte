@@ -1,11 +1,15 @@
+<script>
+import { base } from "$app/paths";
+</script>
+
 <nav>
 	<a href="/">
 		<h1>Colorful Ambience</h1>
 	</a>
 
 	<ul>
-		<li><a href="/app">app</a></li>
-		<li><a href="/about">about</a></li>
+		<li><a href="{base}/app">app</a></li>
+		<li><a href="{base}/about">about</a></li>
 	</ul>
 </nav>
 
