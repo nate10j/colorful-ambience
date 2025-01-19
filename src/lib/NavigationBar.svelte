@@ -3,7 +3,7 @@ import { base } from "$app/paths";
 </script>
 
 <nav>
-	<a href="/">
+	<a href="{base}/">
 		<h1>Colorful Ambience</h1>
 	</a>
 
