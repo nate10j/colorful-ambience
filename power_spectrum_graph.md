@@ -4,6 +4,8 @@ The reference line is meant to show the 1/f noise
 
 ![pink_noise_spectrum-min](https://github.com/user-attachments/assets/22525b91-df88-42a6-934b-0a61400e9970)
 
+I wrote an article about the algorithm used to generate pink noise [here](https://hjkl11.hashnode.dev/the-voss-mccartney-algorithm-in-rust-lang)
+
 ## Brown Noise Graph
 
 The reference line is meant to show the 1/f^2 noise
